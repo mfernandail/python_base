@@ -42,3 +42,4 @@ while numero < 0:
       print("Número inválido. Intente nuevamente.")
   except ValueError:
     print("Entrada no válida. Por favor, ingrese un número entero.")
+print(f"El numero es {numero}")
