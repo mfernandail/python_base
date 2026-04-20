@@ -32,6 +32,20 @@ while contador < 5:
 else:
   print("El contador ha llegado a 5")
 
+print("===============================")
+print("else break")
+print("===============================")
+contador = 0
+while contador < 5:
+  print(contador)
+  contador += 1
+  break
+else:
+  print("El contador ha llegado a 5")
+
+
+
+
 
 numero = -1
 
