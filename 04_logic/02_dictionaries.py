@@ -51,3 +51,11 @@ print("Persona B:", persona_b)
 persona_a.update(persona_b)
 print("\nPersona A después de update:", persona_a)
 print("Persona B después de update:", persona_b)
+
+print("name" in persona_a)  # false
+print("nombre" in persona_a)  # true
+
+# Para obtener todas las claves, valores o pares clave-valor de un diccionario, se pueden usar los métodos keys(), values() y items() respectivamente.
+print("\nClaves:", persona_a.keys())  # dict_keys(['nombre', 'edad
+print("Valores:", persona_a.values())  # dict_values(['Juan', 24, '223-456-4433'])
+print("Pares clave-valor:", persona_a.items())  # dict_items([('nombre, 'Juan'), ('edad', 24), ('telefono', '223-456-4433

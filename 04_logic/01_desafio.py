@@ -1,3 +1,6 @@
+from os import system
+if system("clear") != 0: system("cls")
+
 """
 ¿Está en Equilibrio la Alianza entre Reed Richards y Johnny Storm?
 
@@ -76,3 +79,44 @@ def h_carnivoros(huevos_din):
   return suma
 
 print(h_carnivoros(huevos))
+
+
+"""
+Dado un array de números y un número goal, encuentra los dos primeros números del array que sumen el número goal y devuelve sus índices. Si no existe tal combinación, devuelve None.
+
+nums = [4, 5, 6, 2]
+goal = 8
+
+find_first_sum(nums, goal)  # [2, 3]
+"""
+
+print("\n ---------------------------------")
+print("\n---Solucion con ciclos anidados---")
+print("\n ---------------------------------")
+
+nums = [1, 6, 2, 3, 4, 3]
+goal = 7
+
+def find_first_sum(nums, goal):
+  for i in range(len(nums)):
+    for j in range(i + 1, len(nums)):
+      if nums[i] + nums[j] == goal:
+        return print(f"({i}) {nums[i]} + ({j}) {nums[j]} = {goal}")
+      
+find_first_sum(nums, goal) 
+
+print("\n ------------------------------")
+print("\n---Solucion con dictionaries---")
+print("\n ------------------------------")
+
+def find_first_sum_dictionaries(nums, goal):
+  indices = {}
+  
+  for i, num in enumerate(nums):
+    complement = goal - num
+    if complement in indices:
+      return print(f"({indices[complement]}) {complement} + ({i}) {num} = {goal}")
+    indices[num] = i
+  return None
+
+find_first_sum_dictionaries(nums, goal) 
