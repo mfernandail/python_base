@@ -3,11 +3,32 @@
 compras = []
 
 # Inicia un ciclo infinito (while True)
+while True:
+  print("\n")
+  print("1. Agregar producto")
+  print("2. Ver lista")
+  print("3. Salir")
+  
+  respuesta = input("\n¿Cual opcion eliges? ")
 
-    # Muestra un menú:
-    # 1. Agregar producto
-    # 2. Ver lista
-    # 3. Salir
+  if int(respuesta) == 1:
+    nombreProducto = input("Ingresa el nombre de un producto: ")
+    compras.append(nombreProducto)
+    print(nombreProducto)
+    
+  elif int(respuesta) == 2:
+    if len(compras) == 0:
+      print("Lista vacía")
+    else:
+      for i, compra in enumerate(compras):
+        print(f"Compras #{i + 1}: {compra}")
+    
+  elif int(respuesta) == 3:
+    print("Saliendo")
+    break
+  
+  else:
+    print("opción no es válida")  
 
     # Pide al usuario una opción
 
@@ -25,5 +46,5 @@ compras = []
     # Si la opción es 3:
         # Termina el programa (break)
 
-    # Si la opción no es válida:
+    # Si la opción no es válida:1
         # Muestra mensaje de error
