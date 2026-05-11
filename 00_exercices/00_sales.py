@@ -8,25 +8,37 @@ while True:
   print("1. Agregar producto")
   print("2. Ver lista")
   print("3. Salir")
+  print("4. Eliminar producto")
   
-  respuesta = input("\n¿Cual opcion eliges? ")
+  respuesta = int(input("\n¿Cual opcion eliges? "))
 
-  if int(respuesta) == 1:
-    nombreProducto = input("Ingresa el nombre de un producto: ")
-    compras.append(nombreProducto)
-    print(nombreProducto)
+  if respuesta == 1:
+    nombre_producto = input("Ingresa el nombre de un producto: ")
+    compras.append(nombre_producto)
     
-  elif int(respuesta) == 2:
+  elif respuesta == 2:
     if len(compras) == 0:
       print("Lista vacía")
     else:
       for i, compra in enumerate(compras):
         print(f"Compras #{i + 1}: {compra}")
     
-  elif int(respuesta) == 3:
+  elif respuesta == 3:
     print("Saliendo")
     break
   
+  elif respuesta == 4:
+    print(f"¿Qué número eliminar?")
+    for i, compra in enumerate(compras):
+      print(f"Id: {i} ({compra})")
+    
+    id_eliminar = int(input("Ingrese el id: "))
+    
+    if id_eliminar > 0 & id_eliminar < len(compras):
+      compras.pop(id_eliminar)
+    else:
+      print(f"El id: {id_eliminar} no existe")
+    
   else:
     print("opción no es válida")  
 
