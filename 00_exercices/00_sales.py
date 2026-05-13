@@ -46,16 +46,17 @@ def editar_compra():
       print(f"\nCompra: {compra['nombre']} ({compra['cantidad']})")
       
         
-      cantidad_editar = pedir_numero("Ingresa la cantidad: ")
       
       while True:
+        cantidad_editar = pedir_numero("Ingresa la cantidad: ")
         if cantidad_editar > 0:
           compra["cantidad"] = cantidad_editar
           print(f"Listo! se ha editado a {cantidad_editar}")
           break
         else:
           print("\nLa cantidad debe ser mayor a cero 0")
-          continue
+      
+          
       
   if not producto_encontrado:
     print("=========================")
