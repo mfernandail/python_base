@@ -6,6 +6,103 @@ def pedir_numero(mensaje):
       numero = int(input(mensaje))
       return numero
     except:
+      print("\nSolo se admiten números")
+      
+
+def agregar_compra():
+  nombre_compra = input("Ingresa el nombre de un producto: ")
+  cantidad_compra = pedir_numero("Ingresa la cantidad que quieres comprar: ")
+  
+  compras.append({ "nombre": nombre_compra, "cantidad": cantidad_compra })
+  print("\nProducto agregado correctamente")
+  print(compras)
+  
+
+def ver_compras():
+  for compra in compras:
+    print(f'Compra: {compra["nombre"]} ({compra["cantidad"]})')
+
+def eliminar_producto():
+  for i, compra in enumerate(compras):
+    print(f"Id: {i} - {compra}")
+
+  id_eliminar = pedir_numero("Ingresa el id a eliminar ")
+  
+  if id_eliminar >= 0 and id_eliminar < len(compras):
+    compras.pop(id_eliminar)
+    for i, compra in enumerate(compras):
+      print(f"Id: {i} - {compra}")
+      
+  else:
+    print(f"\nId no encontrado {id_eliminar}")
+
+def editar_compra():
+  nombre_producto_busqueda = input("Ingresa el nombre del producto: ")
+  producto_encontrado = False
+  
+  for compra in compras:
+    if compra["nombre"] == nombre_producto_busqueda:
+      producto_encontrado = True
+      print(f"\nCompra: {compra['nombre']} ({compra['cantidad']})")
+      
+        
+      cantidad_editar = pedir_numero("Ingresa la cantidad: ")
+      
+      while True:
+        if cantidad_editar > 0:
+          compra["cantidad"] = cantidad_editar
+          print(f"Listo! se ha editado a {cantidad_editar}")
+          break
+        else:
+          print("\nLa cantidad debe ser mayor a cero 0")
+          continue
+      
+  if not producto_encontrado:
+    print("=========================")
+    print("= Producto no ecnotrado =")
+    print("=========================")
+
+
+while True:
+  print("\n\n====================")
+  print("======= MENÚ =======")
+  print("====================")
+  print("\n1. Agregar producto")
+  print("2. Ver lista")
+  print("3. Eliminar producto")
+  print("4. Editar producto")
+  print("5. Salir")
+  
+  respuesta = pedir_numero("\n¿Cual opcion eliges? ")
+
+  if respuesta == 1:
+    agregar_compra()
+  
+  elif respuesta == 2:
+    ver_compras()
+  
+  elif respuesta == 3:
+    eliminar_producto()
+  
+  elif respuesta == 4:
+    editar_compra()
+    
+  elif respuesta == 5:
+    print("\nSaliendo, gracias por venir.")
+    break
+  
+  else:
+    print("Opción inválida")
+    
+"""
+compras = []
+
+def pedir_numero(mensaje):
+  while True:
+    try:
+      numero = int(input(mensaje))
+      return numero
+    except:
       print("Solo se admiten números")
       
 
@@ -29,7 +126,7 @@ while True:
     })
     
   elif respuesta == 2:
-    if len(compras) == 0:
+    
       print("Lista vacía")
     else:
       print("\n")
@@ -71,4 +168,5 @@ while True:
       print(f"Producto: {nombre_producto_buscar} no encontrado")
   
   else:
-    print("opción no es válida")  
+    print("opción no es válida")
+"""
