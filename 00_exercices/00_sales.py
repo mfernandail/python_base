@@ -10,17 +10,23 @@ def pedir_numero(mensaje):
       
 
 def agregar_compra():
-  nombre_compra = input("Ingresa el nombre de un producto: ")
+  nombre_compra = input("Ingresa el nombre de un producto: ").lower()
   cantidad_compra = pedir_numero("Ingresa la cantidad que quieres comprar: ")
+  precio_compra = pedir_numero("Ingrese el precio: ")
   
-  compras.append({ "nombre": nombre_compra, "cantidad": cantidad_compra })
+  compras.append({ "nombre": nombre_compra, "cantidad": cantidad_compra, "precio": precio_compra })
   print("\nProducto agregado correctamente")
   print(compras)
   
-
 def ver_compras():
-  for compra in compras:
-    print(f'Compra: {compra["nombre"]} ({compra["cantidad"]})')
+  total_compra = 0
+  for i, compra in enumerate(compras):
+    total_compra += compra["cantidad"] * compra["precio"]
+    print(f'{ i + 1 }. {compra["nombre"]} - Cantidad: {compra["cantidad"]}, ${compra["precio"]} por unidad - Total: {compra["cantidad"] * compra["precio"]}')
+  
+  print("\n=================================")
+  print(f"El total de la compra es: ${total_compra}")
+  print("=================================")
 
 def eliminar_producto():
   for i, compra in enumerate(compras):
@@ -37,7 +43,7 @@ def eliminar_producto():
     print(f"\nId no encontrado {id_eliminar}")
 
 def editar_compra():
-  nombre_producto_busqueda = input("Ingresa el nombre del producto: ")
+  nombre_producto_busqueda = input("Ingresa el nombre del producto: ").lower()
   producto_encontrado = False
   
   for compra in compras:
@@ -63,8 +69,7 @@ def editar_compra():
     print("= Producto no ecnotrado =")
     print("=========================")
 
-
-while True:
+def mostrar_menu():
   print("\n\n====================")
   print("======= MENÚ =======")
   print("====================")
@@ -73,6 +78,9 @@ while True:
   print("3. Eliminar producto")
   print("4. Editar producto")
   print("5. Salir")
+
+while True:
+  mostrar_menu()
   
   respuesta = pedir_numero("\n¿Cual opcion eliges? ")
 
