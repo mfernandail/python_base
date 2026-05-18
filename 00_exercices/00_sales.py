@@ -1,17 +1,20 @@
 compras = []
 
-def pedir_numero(mensaje):
+def pedir_numero(mensaje, num_min = 0):
   while True:
     try:
       numero = int(input(mensaje))
-      return numero
+      if numero >= num_min:
+        return numero
+      else:
+        print(f"\nEl número debe ser mayor o igual a {num_min}")
     except:
       print("\nSolo se admiten números")
       
 
 def agregar_compra():
   nombre_compra = input("Ingresa el nombre de un producto: ").lower()
-  cantidad_compra = pedir_numero("Ingresa la cantidad que quieres comprar: ")
+  cantidad_compra = pedir_numero("Ingresa la cantidad que quieres comprar: ", 1)
   precio_compra = pedir_numero("Ingrese el precio: ")
   
   compras.append({ "nombre": nombre_compra, "cantidad": cantidad_compra, "precio": precio_compra })
@@ -19,26 +22,31 @@ def agregar_compra():
   print(compras)
   
 def ver_compras():
-  total_compra = 0
-  for i, compra in enumerate(compras):
-    total_compra += compra["cantidad"] * compra["precio"]
-    print(f'{ i + 1 }. {compra["nombre"]} - Cantidad: {compra["cantidad"]}, ${compra["precio"]} por unidad - Total: {compra["cantidad"] * compra["precio"]}')
-  
-  print("\n=================================")
-  print(f"El total de la compra es: ${total_compra}")
-  print("=================================")
+  if len(compras) == 0:
+    print("\n==============================")
+    print("Aun no hay compras realizadas")
+    print("==============================")
+
+  else:
+    total_compra = 0
+    for i, compra in enumerate(compras):
+      total_compra += compra["cantidad"] * compra["precio"]
+      print(f'{ i + 1 }. {compra["nombre"]} - Cantidad: {compra["cantidad"]}, ${compra["precio"]} por unidad - Total: {compra["cantidad"] * compra["precio"]}')
+    
+    print("\n=================================")
+    print(f"El total de la compra es: ${total_compra}")
+    print("=================================")
 
 def eliminar_producto():
   for i, compra in enumerate(compras):
-    print(f"Id: {i} - {compra}")
+    print(f'Id: [{i}] {compra["nombre"]} - Cantidad: {compra["cantidad"]}, ${compra["precio"]} por unidad - Total: {compra["cantidad"] * compra["precio"]}')
 
-  id_eliminar = pedir_numero("Ingresa el id a eliminar ")
+  id_eliminar = pedir_numero("Ingresa el id a eliminar: ")
   
   if id_eliminar >= 0 and id_eliminar < len(compras):
     compras.pop(id_eliminar)
     for i, compra in enumerate(compras):
-      print(f"Id: {i} - {compra}")
-      
+      print(f'{ i + 1 }. {compra["nombre"]} - Cantidad: {compra["cantidad"]}, ${compra["precio"]} por unidad - Total: {compra["cantidad"] * compra["precio"]}')
   else:
     print(f"\nId no encontrado {id_eliminar}")
 
@@ -102,80 +110,3 @@ while True:
   
   else:
     print("Opción inválida")
-    
-"""
-compras = []
-
-def pedir_numero(mensaje):
-  while True:
-    try:
-      numero = int(input(mensaje))
-      return numero
-    except:
-      print("Solo se admiten números")
-      
-
-while True:
-  print("\n")
-  print("1. Agregar producto")
-  print("2. Ver lista")
-  print("3. Salir")
-  print("4. Eliminar producto")
-  print("5. Editar producto")
-  
-  respuesta = pedir_numero("\n¿Cual opcion eliges? ")
-  
-  if respuesta == 1:
-    nombre_producto = input("Ingresa el nombre de un producto: ")
-    cantidad_producto = pedir_numero("Ingresa la cantidad: ")
-    
-    compras.append({
-      "nombre": nombre_producto,
-      "cantidad": cantidad_producto
-    })
-    
-  elif respuesta == 2:
-    
-      print("Lista vacía")
-    else:
-      print("\n")
-      for i, compra in enumerate(compras):
-        print(f"Compras #{i + 1}: {compra}")
-    
-  elif respuesta == 3:
-    print("Saliendo")
-    break
-  
-  elif respuesta == 4:
-    print(f"¿Qué número eliminar?")
-    for i, compra in enumerate(compras):
-      print(f"Id: {i} ({compra})")
-    
-    id_eliminar = pedir_numero("Ingrese el id: ")
-    
-    if id_eliminar >= 0 and id_eliminar < len(compras):
-      compras.pop(id_eliminar)
-    else:
-      print(f"El id: {id_eliminar} no existe")
-  
-  elif respuesta == 5:
-    nombre_producto_buscar = input("¿Qué producto quieres editar? ")
-
-    encontrado = False
-    
-    for compra in compras:
-      if compra["nombre"] == nombre_producto_buscar:
-        encontrado = True
-    
-        print(f"Producto encontrado: {nombre_producto_buscar} - cantidad: {compra["cantidad"]}")    
-        nueva_cantidad = pedir_numero(f"Ingresa la nueva cantidad para {nombre_producto_buscar}: ")
-        
-        compra["cantidad"] = nueva_cantidad
-        break
-
-    if not encontrado:
-      print(f"Producto: {nombre_producto_buscar} no encontrado")
-  
-  else:
-    print("opción no es válida")
-"""
