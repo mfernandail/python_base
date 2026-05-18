@@ -14,13 +14,27 @@ def pedir_numero(mensaje, num_min = 0):
 
 def agregar_compra():
   nombre_compra = input("Ingresa el nombre de un producto: ").lower()
-  cantidad_compra = pedir_numero("Ingresa la cantidad que quieres comprar: ", 1)
-  precio_compra = pedir_numero("Ingrese el precio: ")
-  
-  compras.append({ "nombre": nombre_compra, "cantidad": cantidad_compra, "precio": precio_compra })
-  print("\nProducto agregado correctamente")
-  print(compras)
-  
+  existe_compra = False
+
+  if len(compras) > 0:
+    for compra in compras:
+      if compra["nombre"] == nombre_compra:
+        existe_compra = True
+
+  if existe_compra == False:
+    cantidad_compra = pedir_numero("Ingresa la cantidad que quieres comprar: ", 1)
+    precio_compra = pedir_numero("Ingrese el precio: ")
+    
+    compras.append({ "nombre": nombre_compra, "cantidad": cantidad_compra, "precio": precio_compra })
+    print("\nProducto agregado correctamente")
+    print(compras)
+
+  else:
+    print("\n==============================================================")
+    print(f"El producto {nombre_compra} ya asta ingresado, edita su cantidad")
+    print("==============================================================")
+
+
 def ver_compras():
   if len(compras) == 0:
     print("\n==============================")
