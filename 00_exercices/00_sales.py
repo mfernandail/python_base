@@ -1,4 +1,16 @@
-compras = []
+import json
+
+
+
+try:
+  with open("compras_lista.json", "r") as archivo:
+    compras = json.load(archivo)
+except FileNotFoundError:
+  compras = []
+
+def guardar_jsson():
+  with open("compras_lista.json", "w") as archivo:
+    json.dump(compras, archivo, indent=2)
 
 def pedir_numero(mensaje, num_min = 0):
   while True:
@@ -10,7 +22,6 @@ def pedir_numero(mensaje, num_min = 0):
         print(f"\nEl número debe ser mayor o igual a {num_min}")
     except:
       print("\nSolo se admiten números")
-      
 
 def agregar_compra():
   nombre_compra = input("Ingresa el nombre de un producto: ").lower()
@@ -21,11 +32,14 @@ def agregar_compra():
       if compra["nombre"] == nombre_compra:
         existe_compra = True
 
-  if existe_compra == False:
+  if not existe_compra:
     cantidad_compra = pedir_numero("Ingresa la cantidad que quieres comprar: ", 1)
     precio_compra = pedir_numero("Ingrese el precio: ")
     
     compras.append({ "nombre": nombre_compra, "cantidad": cantidad_compra, "precio": precio_compra })
+
+    guardar_jsson()
+
     print("\nProducto agregado correctamente")
     print(compras)
 
@@ -33,7 +47,6 @@ def agregar_compra():
     print("\n==============================================================")
     print(f"El producto {nombre_compra} ya asta ingresado, edita su cantidad")
     print("==============================================================")
-
 
 def ver_compras():
   if len(compras) == 0:
@@ -59,6 +72,9 @@ def eliminar_producto():
   
   if id_eliminar >= 0 and id_eliminar < len(compras):
     compras.pop(id_eliminar)
+
+    guardar_jsson()
+
     for i, compra in enumerate(compras):
       print(f'{ i + 1 }. {compra["nombre"]} - Cantidad: {compra["cantidad"]}, ${compra["precio"]} por unidad - Total: {compra["cantidad"] * compra["precio"]}')
   else:
@@ -72,24 +88,18 @@ def editar_compra():
     if compra["nombre"] == nombre_producto_busqueda:
       producto_encontrado = True
       print(f"\nCompra: {compra['nombre']} ({compra['cantidad']})")
-      
-        
-      
-      while True:
-        cantidad_editar = pedir_numero("Ingresa la cantidad: ")
-        if cantidad_editar > 0:
-          compra["cantidad"] = cantidad_editar
-          print(f"Listo! se ha editado a {cantidad_editar}")
-          break
-        else:
-          print("\nLa cantidad debe ser mayor a cero 0")
-      
-          
-      
+
+      cantidad_editar = pedir_numero("Ingresa la cantidad: ", 1)
+      compra["cantidad"] = cantidad_editar
+      print(f"Listo! se ha editado a {cantidad_editar}")
+
   if not producto_encontrado:
     print("=========================")
     print("= Producto no ecnotrado =")
     print("=========================")
+
+  else:
+    guardar_jsson()
 
 def mostrar_menu():
   print("\n\n====================")
