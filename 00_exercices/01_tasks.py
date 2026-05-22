@@ -19,7 +19,7 @@ def validar_numero(cadena, num_min = 0):
       print("\nSolo se admiten números")
 
 def guardar_tareas_json():
-  with open("tareas.json", "w") as archivo:
+  with open("./00_exercices/json/tareas.json", "w") as archivo:
     json.dump(tareas, archivo, indent=2)
 
 def ver_aciones():
@@ -53,13 +53,28 @@ def ver_tareas():
   if len(tareas) == 0:
     print("\nNo hay tareas")
   else:
+    print("\n-------------------------------------------------")
     for tarea in tareas:
-      print(f'Titulo: {tarea["titulo"]}')
-      print(f'Prioridad: {tarea["prioridad"]} [Completada: {tarea["completada"]}]')
+      if tarea["completada"]:
+        estado_tarea = "✅"
+      else:
+        estado_tarea = "❌"
+      
+      if tarea["prioridad"] == "alta":
+        prioridad_tarea = "🔴"
+      elif tarea["prioridad"] == "media":
+        prioridad_tarea = "🟡"
+      else:
+        prioridad_tarea = "🟢"
+
+      print(f'{estado_tarea} | {prioridad_tarea} | Titulo: {tarea["titulo"]} ')
+      print("-------------------------------------------------")
+
 
 
 while True:
   ver_aciones()
+
   accion_seleccionada = validar_numero("\nIngresa la accion que deseas: ")
   
   if accion_seleccionada == 1:
