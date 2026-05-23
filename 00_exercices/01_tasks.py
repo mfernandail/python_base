@@ -33,20 +33,45 @@ def ver_aciones():
   print("5. Buscar tarea")
   print("6. Salir")
 
+def validad_campos(pregunta, opcion = 1):
+  while True:
+    respuesta = input(pregunta).lower().strip()
+
+    if len(respuesta) == 0:
+      print("\n❗️ Ingresa una respuesta\n")
+      continue
+
+    if opcion == 2:
+      if respuesta in ["alta", "media", "baja"]:
+        return respuesta
+      else:
+        print("\n❗ La prioridad debe ser: alta, media o baja\n")
+    elif opcion == 3:
+      if respuesta in ["true", "false"]:
+        if respuesta == "true":
+          return True
+        else:
+          return False
+      else:
+        print("\n❗ Solo puedes escribir: true o false\n")
+    else:
+      return respuesta
+
+    
 
 def agregar_tarea():
-  print("Agregando")
-  nuevo_titulo = input("Ingresa un titulo: ")
-  nuevo_prioridad = input("Ingresa una prioridad: ")
-  nuevo_completada = input("Esta completa? ")
+  nueva_titulo = validad_campos("Ingresa un titulo: ")
+  nueva_prioridad = validad_campos("Ingresa una prioridad: ", 2)
+  nueva_completada = validad_campos("Esta completa? ", 3)
 
   tareas.append({
-    "titulo": nuevo_titulo,
-    "completada": nuevo_completada,
-    "prioridad": nuevo_prioridad
+    "titulo": nueva_titulo,
+    "completada": nueva_completada,
+    "prioridad": nueva_prioridad
   })
 
   guardar_tareas_json()
+
 
 
 def ver_tareas():
