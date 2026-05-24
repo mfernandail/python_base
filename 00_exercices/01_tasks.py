@@ -15,14 +15,14 @@ def validar_numero(cadena, num_min = 0):
         return numero
       else:
         print(f"\nEl número debe ser mayor o igual a {num_min}")
-    except:
+    except ValueError:
       print("\nSolo se admiten números")
 
 def guardar_tareas_json():
   with open("./00_exercices/json/tareas.json", "w") as archivo:
     json.dump(tareas, archivo, indent=2)
 
-def ver_aciones():
+def ver_acciones():
   print("\n\n====================")
   print("======= MENÚ =======")
   print("====================")
@@ -33,7 +33,7 @@ def ver_aciones():
   print("5. Buscar tarea")
   print("6. Salir")
 
-def validad_campos(pregunta, opcion = 1):
+def validar_campos(pregunta, opcion = 1):
   while True:
     respuesta = input(pregunta).lower().strip()
 
@@ -48,10 +48,7 @@ def validad_campos(pregunta, opcion = 1):
         print("\n❗ La prioridad debe ser: alta, media o baja\n")
     elif opcion == 3:
       if respuesta in ["true", "false"]:
-        if respuesta == "true":
-          return True
-        else:
-          return False
+        return respuesta == "true"
       else:
         print("\n❗ Solo puedes escribir: true o false\n")
     else:
@@ -60,9 +57,9 @@ def validad_campos(pregunta, opcion = 1):
     
 
 def agregar_tarea():
-  nueva_titulo = validad_campos("Ingresa un titulo: ")
-  nueva_prioridad = validad_campos("Ingresa una prioridad: ", 2)
-  nueva_completada = validad_campos("Esta completa? ", 3)
+  nueva_titulo = validar_campos("Ingresa un titulo: ")
+  nueva_prioridad = validar_campos("Ingresa una prioridad: ", 2)
+  nueva_completada = validar_campos("Esta completa? ", 3)
 
   tareas.append({
     "titulo": nueva_titulo,
@@ -98,16 +95,16 @@ def ver_tareas():
 
 
 while True:
-  ver_aciones()
+  ver_acciones()
 
   accion_seleccionada = validar_numero("\nIngresa la accion que deseas: ")
   
   if accion_seleccionada == 1:
     agregar_tarea()
   
-  if accion_seleccionada == 2:
+  elif accion_seleccionada == 2:
     ver_tareas()
 
-  if accion_seleccionada == 6:
+  elif accion_seleccionada == 6:
     break
     
