@@ -92,7 +92,33 @@ def ver_tareas():
       print(f'{estado_tarea} | {prioridad_tarea} | Titulo: {tarea["titulo"]} ')
       print("-------------------------------------------------")
 
+def completar_tarea():
+  for i, tarea in enumerate(tareas):
+    print("\nListado de tareas: ")
+    print(f'[{i}] Tarea: {tarea["titulo"]}')
 
+  id_tarea_completar = validar_numero("\n¿Que tarea quieres completar? ", 0)
+
+  print(type(id_tarea_completar))
+
+  for i, tarea in enumerate(tareas):
+    if i == id_tarea_completar:
+      tarea["completada"] = True
+      break
+  
+
+def eliminar_tarea():
+  print("Eliminando")
+  for i, tarea in enumerate(tareas):
+    print("\nListado de tareas: ")
+    print(f'[{i}] Tarea: {tarea["titulo"]}')
+
+  id_tarea_eliminar = validar_numero("\n¿Que tarea quieres eliminar? ", 0)
+
+  tareas.pop(id_tarea_eliminar)
+
+def buscar_tarea():
+  print("Buscar tarea")
 
 while True:
   ver_acciones()
@@ -104,6 +130,15 @@ while True:
   
   elif accion_seleccionada == 2:
     ver_tareas()
+  
+  elif accion_seleccionada == 3:
+    completar_tarea()
+
+  elif accion_seleccionada == 4:
+    eliminar_tarea()
+
+  elif accion_seleccionada == 5:
+    buscar_tarea()
 
   elif accion_seleccionada == 6:
     break
