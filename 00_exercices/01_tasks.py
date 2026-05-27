@@ -94,26 +94,33 @@ def ver_tareas():
 
 def completar_tarea():
   for i, tarea in enumerate(tareas):
-    print("\nListado de tareas: ")
-    print(f'[{i}] Tarea: {tarea["titulo"]}')
+    if not tarea["completada"]:
+      print("\nListado de tareas: ")
+      print(f'[{i}] Tarea: {tarea["titulo"]}')
 
-  id_tarea_completar = validar_numero("\n¿Que tarea quieres completar? ", 0)
+  while True:
+    id_tarea_completar = validar_numero("\n¿Que tarea quieres completar? ", 0)
 
-  print(type(id_tarea_completar))
-
-  for i, tarea in enumerate(tareas):
-    if i == id_tarea_completar:
-      tarea["completada"] = True
+    if id_tarea_completar < len(tareas):
       break
+    else:
+      print(f"El id: {id_tarea_completar} no existe, ingresa un id que este en el rango, menor a {len(tareas)}")
+
+  tareas[id_tarea_completar]["completada"] = True
   
 
 def eliminar_tarea():
-  print("Eliminando")
   for i, tarea in enumerate(tareas):
     print("\nListado de tareas: ")
     print(f'[{i}] Tarea: {tarea["titulo"]}')
 
-  id_tarea_eliminar = validar_numero("\n¿Que tarea quieres eliminar? ", 0)
+  while True:
+    id_tarea_eliminar = validar_numero("\n¿Que tarea quieres eliminar? ", 0)
+
+    if id_tarea_eliminar < len(tareas):
+      break
+    else:
+      print(f"El id: {id_tarea_eliminar} no existe, ingresa un id que este en el rango, menor a {len(tareas)}")
 
   tareas.pop(id_tarea_eliminar)
 
