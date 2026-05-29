@@ -70,6 +70,23 @@ def agregar_tarea():
   guardar_tareas_json()
 
 
+def mostrar_tareas():
+  print("\n-------------------------------------------------")
+  for tarea in tareas:
+    if tarea["completada"]:
+      estado_tarea = "✅"
+    else:
+      estado_tarea = "❌"
+    
+    if tarea["prioridad"] == "alta":
+      prioridad_tarea = "🔴"
+    elif tarea["prioridad"] == "media":
+      prioridad_tarea = "🟡"
+    else:
+      prioridad_tarea = "🟢"
+
+    print(f'{estado_tarea} | {prioridad_tarea} | Titulo: {tarea["titulo"]} ')
+    print("-------------------------------------------------")
 
 def ver_tareas():
   if len(tareas) == 0:
@@ -107,7 +124,7 @@ def completar_tarea():
       print(f"El id: {id_tarea_completar} no existe, ingresa un id que este en el rango, menor a {len(tareas)}")
 
   tareas[id_tarea_completar]["completada"] = True
-  
+  guardar_tareas_json()
 
 def eliminar_tarea():
   for i, tarea in enumerate(tareas):
@@ -123,9 +140,41 @@ def eliminar_tarea():
       print(f"El id: {id_tarea_eliminar} no existe, ingresa un id que este en el rango, menor a {len(tareas)}")
 
   tareas.pop(id_tarea_eliminar)
+  guardar_tareas_json()
 
 def buscar_tarea():
-  print("Buscar tarea")
+  tarea_encontrada = False
+  while True:
+    ingresa_tarea_buscar = input("Ingresa una tarea: ")
+
+    if len(ingresa_tarea_buscar) > 0:
+      print(f"La terea buscada es: {ingresa_tarea_buscar}")
+
+      for tarea in tareas:
+        if tarea["titulo"] == ingresa_tarea_buscar:
+          print("\n-------------------------------------------------")
+
+          if tarea["completada"]:
+            estado_tarea = "✅"
+          else:
+            estado_tarea = "❌"
+          
+          if tarea["prioridad"] == "alta":
+            prioridad_tarea = "🔴"
+          elif tarea["prioridad"] == "media":
+            prioridad_tarea = "🟡"
+          else:
+            prioridad_tarea = "🟢"
+
+          print(f'{estado_tarea} | {prioridad_tarea} | Titulo: {tarea["titulo"]} ')
+      break
+
+  if not tarea_encontrada:
+    print("\n-------------------------------------------------")
+    print(f"Tarea ({ingresa_tarea_buscar}) no encontrada!")
+    print("-------------------------------------------------")
+
+
 
 while True:
   ver_acciones()
