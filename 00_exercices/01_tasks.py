@@ -151,7 +151,9 @@ def buscar_tarea():
       print(f"La terea buscada es: {ingresa_tarea_buscar}")
 
       for tarea in tareas:
+
         if tarea["titulo"] == ingresa_tarea_buscar:
+          tarea_encontrada = True
           print("\n-------------------------------------------------")
 
           if tarea["completada"]:
