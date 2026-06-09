@@ -1,3 +1,5 @@
+import json
+
 opciones = {
   1: "Agregar gasto",
   2: "Ver todos los gastos",
@@ -5,6 +7,12 @@ opciones = {
   4: "Ver gastos por categoría",
   5: "Salir"
 }
+
+try:
+  with open("./00_exercices/json/gastos_operaciones.json", "r") as gastos_guardados:
+    gastos = json.load(gastos_guardados)
+except FileNotFoundError:
+  gastos = []
 
 def validar_numero(input_ingresado, num_min = 0):
   while True:
@@ -33,4 +41,11 @@ while True:
   ver_opciones()
 
   opcion_ingresada = validar_numero("Ingresa una opción: ")
+
+  if opcion_ingresada is not opciones:
+    print("Opción seleccionada fuera de rango")
+
+  if opcion_ingresada == 5:
+    break
+
   print(f"El numero es: {opcion_ingresada}")
