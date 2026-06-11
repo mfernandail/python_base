@@ -26,7 +26,27 @@ def validar_numero(input_ingresado, num_min = 0):
 
     except:
       print("Debe ser número entero")
-  
+
+def validar_vacios(input_ingresado):
+  while True:
+    texto = input(input_ingresado)
+
+    if len(texto) > 0:
+      return texto
+    else:
+      print("Por favor ingresa algun texto")
+
+
+def agregar_gasto():
+  while True:
+    gasto_nuevo_desc = validar_vacios("Ingrese la descripción del gasto: ")
+    gasto_nuevo_monto = validar_numero("Ingrese el monto del gasto: $")
+    gasto_nuevo_cat = validar_vacios("Ingrese la categoria del gasto: ")
+
+    print(f"\n{gasto_nuevo_desc}")
+    print(f"\n{gasto_nuevo_monto}")
+    print(f"\n{gasto_nuevo_cat}")
+
 
 def ver_opciones():
   print("\n\n===== OPCIONES =====")
@@ -37,15 +57,22 @@ def ver_opciones():
   print("5. Salir")
 
 
+
 while True:
   ver_opciones()
 
-  opcion_ingresada = validar_numero("Ingresa una opción: ")
+  opcion_ingresada = validar_numero("\nIngresa una opción: ")
 
-  if opcion_ingresada is not opciones:
+  if opcion_ingresada not in opciones:
     print("Opción seleccionada fuera de rango")
+    continue
+  
+  print("\n= = = = = = = = = = = = = = = = = = = = = = = =")
+  print(f"Opción seleccionada: {opciones[opcion_ingresada]}")
+  print("= = = = = = = = = = = = = = = = = = = = = = = =\n")
 
-  if opcion_ingresada == 5:
+  if opcion_ingresada == 1:
+    agregar_gasto()
+
+  elif opcion_ingresada == 5:
     break
-
-  print(f"El numero es: {opcion_ingresada}")
