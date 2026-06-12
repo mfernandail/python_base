@@ -14,6 +14,10 @@ try:
 except FileNotFoundError:
   gastos = []
 
+def guardar_json():
+  with open("./00_exercices/json/gastos_operaciones.json", "w") as items:
+    json.dump(gastos, items, indent=2)
+
 def validar_numero(input_ingresado, num_min = 0):
   while True:
     try:
@@ -38,15 +42,32 @@ def validar_vacios(input_ingresado):
 
 
 def agregar_gasto():
-  while True:
-    gasto_nuevo_desc = validar_vacios("Ingrese la descripción del gasto: ")
-    gasto_nuevo_monto = validar_numero("Ingrese el monto del gasto: $")
-    gasto_nuevo_cat = validar_vacios("Ingrese la categoria del gasto: ")
+  gasto_nuevo_desc = validar_vacios("Ingrese la descripción del gasto: ")
+  gasto_nuevo_monto = validar_numero("Ingrese el monto del gasto: $")
+  gasto_nuevo_cat = validar_vacios("Ingrese la categoria del gasto: ")
 
-    print(f"\n{gasto_nuevo_desc}")
-    print(f"\n{gasto_nuevo_monto}")
-    print(f"\n{gasto_nuevo_cat}")
+  gastos.append({
+    "descripcion": gasto_nuevo_desc,
+    "monto": gasto_nuevo_monto,
+    "categoria": gasto_nuevo_cat
+  })
 
+  guardar_json()
+
+  print(gastos)
+
+def ver_gastos():
+  if len(gastos) == 0:
+    print("No hay gastos para mostrar")
+    return
+  
+  total_gastos = 0
+
+  for i, gasto in enumerate(gastos):
+    print(f"{i + 1}. {gasto['descripcion']} - ${gasto['monto']} - {gasto['categoria']}")
+    total_gastos += gasto["monto"]
+
+  print(f"\nTotal: ${total_gastos}")
 
 def ver_opciones():
   print("\n\n===== OPCIONES =====")
@@ -73,6 +94,7 @@ while True:
 
   if opcion_ingresada == 1:
     agregar_gasto()
-
+  elif opcion_ingresada == 2:
+    ver_gastos()
   elif opcion_ingresada == 5:
     break
