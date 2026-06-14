@@ -28,18 +28,22 @@ def validar_numero(input_ingresado, num_min = 0):
       else:
         print("Debe ser número ser mayor")
 
-    except:
+    except ValueError:
       print("Debe ser número entero")
 
 def validar_vacios(input_ingresado):
   while True:
     texto = input(input_ingresado)
 
-    if len(texto) > 0:
+    if texto:
       return texto
     else:
       print("Por favor ingresa algun texto")
 
+def calcular_total():
+  total = sum(gasto["monto"] for gasto in gastos)
+
+  return total
 
 def agregar_gasto():
   gasto_nuevo_desc = validar_vacios("Ingrese la descripción del gasto: ")
@@ -61,23 +65,44 @@ def ver_gastos():
     print("No hay gastos para mostrar")
     return
   
-  total_gastos = 0
+  total_gastos = calcular_total()
 
   for i, gasto in enumerate(gastos):
     print(f"{i + 1}. {gasto['descripcion']} - ${gasto['monto']} - {gasto['categoria']}")
-    total_gastos += gasto["monto"]
 
   print(f"\nTotal: ${total_gastos}")
 
+def ver_gastos_total():
+  if len(gastos) == 0:
+    print("No hay gastos para mostrar")
+    return
+  
+  total_gastos = calcular_total()
+
+  print(f"\nTotal: ${total_gastos}")
+
+def ver_gastos_categoria():
+  if len(gastos) == 0:
+    print("No hay gastos para mostrar")
+    return
+  
+  gasto_categorias = {}
+
+  for gasto in gastos:
+    categoria = gasto["categoria"]
+
+    if categoria not in gasto_categorias:
+      gasto_categorias[categoria] = 0
+
+    gasto_categorias[categoria] += gasto["monto"]
+
+    
+  print(gasto_categorias)
+
 def ver_opciones():
   print("\n\n===== OPCIONES =====")
-  print("1. Agregar gasto")
-  print("2. Ver todos los gastos")
-  print("3. Ver total gastado")
-  print("4. Ver gastos por categoría")
-  print("5. Salir")
-
-
+  for numero, texto in opciones.items():
+    print(f"{numero}. {texto}")
 
 while True:
   ver_opciones()
@@ -96,5 +121,9 @@ while True:
     agregar_gasto()
   elif opcion_ingresada == 2:
     ver_gastos()
+  elif opcion_ingresada == 3:
+    ver_gastos_total()
+  elif opcion_ingresada == 4:
+    ver_gastos_categoria()
   elif opcion_ingresada == 5:
     break
