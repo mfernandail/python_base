@@ -2,34 +2,34 @@
 
 ## Resumen rápido
 
-| Metachar | Significado            |
-| -------- | ---------------------- |
-| `\d`     | Dígito                 |
-| `\D`     | No dígito              |
-| `\w`     | Letra, número o `_`    |
-| `\W`     | No letra, número o `_` |
-| `\s`     | Espacio en blanco      |
-| `\S`     | No espacio             |
-| `.`      | Cualquier carácter     |
-| `^`      | Inicio                 |
-| `$`      | Final                  |
-| `\A`     | Inicio absoluto        |
-| `\Z`     | Final absoluto         |
-| `\b`     | Límite de palabra      |
-| `\B`     | No límite de palabra   |
-| `*`      | 0 o más                |
-| `+`      | 1 o más                |
-| `?`      | 0 o 1                  |
-| `{n}`    | Exactamente n          |
-| `{n,}`   | n o más                |
-| `{n,m}`  | Entre n y m            |
-| `[]`     | Conjunto               |
-| `[^]`    | Negación               |
-| `-`      | Rango                  |
-| `\| `    | OR                     |
-| `()`     | Grupo                  |
-| `(?:)`   | Grupo no capturante    |
-| `\`      | Escapar caracteres     |
+| Metachar | Significado                                   |
+| -------- | --------------------------------------------- |
+| `\d`     | Dígito                                        |
+| `\D`     | No dígito                                     |
+| `\w`     | Letra, número o `_`                           |
+| `\W`     | No letra, número o `_`                        |
+| `\s`     | Espacio en blanco, salto de linea, tabulación |
+| `\S`     | No espacio                                    |
+| `.`      | Cualquier carácter                            |
+| `^`      | Inicio                                        |
+| `$`      | Final                                         |
+| `\A`     | Inicio absoluto                               |
+| `\Z`     | Final absoluto                                |
+| `\b`     | Límite de palabra                             |
+| `\B`     | No límite de palabra                          |
+| `*`      | 0 o más                                       |
+| `+`      | 1 o más                                       |
+| `?`      | 0 o 1                                         |
+| `{n}`    | Exactamente n                                 |
+| `{n,}`   | n o más                                       |
+| `{n,m}`  | Entre n y m                                   |
+| `[]`     | Conjunto                                      |
+| `[^]`    | Negación                                      |
+| `-`      | Rango                                         |
+| `\| `    | OR                                            |
+| `()`     | Grupo                                         |
+| `(?:)`   | Grupo no capturante                           |
+| `\`      | Escapar caracteres                            |
 
 ## Clases de caracteres predefinidas
 
